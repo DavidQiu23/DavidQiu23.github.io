@@ -43,9 +43,10 @@ tags:
     /usr/local/bin/noip2 -S #先查看PID
     /usr/local/bin/noip2 -K {PID} #再砍程序
     ```
-> 要使用NO-IP連進租屋處網路要設定通訊埠轉發(Port Forwarding),指定樹莓派的IP位置與要對應的Port號
-> VNC:5900
-> Minecraft:25565
+
+> 要使用NO-IP連進租屋處網路要設定通訊埠轉發(Port Forwarding),指定樹莓派的IP位置與要對應的Port號  
+VNC:5900  
+Minecraft:25565  
 
 ###  參考資料
 - [浮動IP照樣架站！NOIP DDNS 動態域名免費服務設定，遠端桌面也好用 | 老貓測3C](https://iqmore.tw/no-ip-free-dynamic-dns)
@@ -55,8 +56,8 @@ tags:
 
 ## USB隨身碟開機
 
-> 注意！！不能使用**NOOBS**的版本,這坑很大,試了好幾天重灌好幾次文章看好幾遍,差點放棄,關鍵字：`mmc1 controller never released inhibit bit(s)`
-> 沒試過把sd卡複製到usb裡在啟動能不能成功,我成功是直接用Imager燒在usb裡直接開機
+> 注意！！不能使用**NOOBS**的版本,這坑很大,試了好幾天重灌好幾次文章看好幾遍,差點放棄,關鍵字：`mmc1 controller never released inhibit bit(s)`  
+沒試過把sd卡複製到usb裡在啟動能不能成功,我成功是直接用Imager燒在usb裡直接開機
 
 - 照著[這篇](https://sleeplessbeastie.eu/2022/12/16/how-to-boot-raspberry-pi-4-from-usb-ssd/)操作應該不會錯
 
