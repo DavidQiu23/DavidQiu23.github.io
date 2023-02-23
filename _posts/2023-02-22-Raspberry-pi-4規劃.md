@@ -49,15 +49,16 @@ VNC:5900
 Minecraft:25565  
 
 ###  參考資料
-- [浮動IP照樣架站！NOIP DDNS 動態域名免費服務設定，遠端桌面也好用 | 老貓測3C](https://iqmore.tw/no-ip-free-dynamic-dns)
+- [浮動IP照樣架站！NOIP DDNS 動態域名免費服務設定，遠端桌面也好用](https://iqmore.tw/no-ip-free-dynamic-dns)
 - [NO-IP 使用教學 - 程式學習筆記](https://sites.google.com/site/chengshixuexipingtai/qi-ta/no-ip-shi-yong-jiao-xue)
 - [How to Install the Dynamic Update Client on Linux](https://www.noip.com/support/knowledgebase/installing-the-linux-dynamic-update-client/)
 - [NO-IP 安裝設定 · Raspberry Pi 安裝設定手冊](https://lins2000.gitbooks.io/raspberry-pi-installation-guide/content/di-yi-ci-qi-dong/noip-an-zhuang-she-ding.html)
 
 ## USB隨身碟開機
 
-> 注意！！不能使用**NOOBS**的版本,這坑很大,試了好幾天重灌好幾次文章看好幾遍,差點放棄,關鍵字：`mmc1 controller never released inhibit bit(s)`  
-沒試過把sd卡複製到usb裡在啟動能不能成功,我成功是直接用Imager燒在usb裡直接開機
+> 注意！！不能使用**NOOBS**的版本,這坑很大,試了好幾天重灌好幾次文章看好幾遍,差點放棄  
+關鍵字：`mmc1 controller never released inhibit bit(s)`,正常看到這行還是能啟動,但是NOOBS會跳兩次這行就卡在第二的畫面了  
+所以沒試過把sd卡複製到usb裡在啟動能不能成功,我成功是直接用Imager燒在usb裡直接開機
 
 - 照著[這篇](https://sleeplessbeastie.eu/2022/12/16/how-to-boot-raspberry-pi-4-from-usb-ssd/)操作應該不會錯
 
