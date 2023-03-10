@@ -36,6 +36,9 @@ author:
   bio      : "技能點在FPS遊戲上的軟體工程師"
   location : "Taipei, Taiwan"
   links:
+    - label: "尻尻屋專屬硬碟"
+      icon: "fas fa-server"
+      url: "http://davidchu.ddns.net:8080"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/DavidQiu23"
