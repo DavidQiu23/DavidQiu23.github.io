@@ -15,9 +15,7 @@ tags:
 - 開啟VNC
 - 設定環境變數 [參考](https://pimylifeup.com/environment-variables-linux/)
     - 定義在`~/.profile`裡,指令加在最後一行後面,範圍是該登入的使用者,**特殊字元用單引號**
-- 更新樹莓派軟體
-    - [如何更新 Raspbian?](https://piepie.com.tw/20004/faq-how-to-update-and-upgrade-raspbian)
-
+- [如何更新 Raspbian?](https://piepie.com.tw/20004/faq-how-to-update-and-upgrade-raspbian)
 
 ### 參考資料
 - [安裝Raspberry Pi OS](https://www.chipwaygo.com/doc/rpi_install.php)
