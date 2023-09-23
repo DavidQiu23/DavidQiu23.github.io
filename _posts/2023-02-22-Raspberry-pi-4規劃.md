@@ -15,11 +15,13 @@ tags:
 - 開啟VNC
 - 設定環境變數 [參考](https://pimylifeup.com/environment-variables-linux/)
     - 定義在`~/.profile`裡,指令加在最後一行後面,範圍是該登入的使用者,**特殊字元用單引號**
-- [如何更新 Raspbian?](https://piepie.com.tw/20004/faq-how-to-update-and-upgrade-raspbian)
-- [headless解析度調整](https://m.clearbluedesign.com/make-headless-raspberry-pi-vnc-open-in-1080p-9f644ecc3cdd)
 
 ### 參考資料
 - [安裝Raspberry Pi OS](https://www.chipwaygo.com/doc/rpi_install.php)
+- [如何更新 Raspbian?](https://piepie.com.tw/20004/faq-how-to-update-and-upgrade-raspbian)
+- [headless解析度調整](https://m.clearbluedesign.com/make-headless-raspberry-pi-vnc-open-in-1080p-9f644ecc3cdd)
+- [如何申請非固定至固定ip](https://support.1shop.tw/%E5%A6%82%E4%BD%95%E7%94%B3%E8%AB%8B%E5%9B%BA%E5%AE%9Aip-%E4%B8%AD%E8%8F%AF%E9%9B%BB%E4%BF%A1hinet/)
+- [如何讓樹莓派取得固定ip](http://yhhuang1966.blogspot.com/2021/08/ppoe-ip.html)
 
 ## NO-IP
 
