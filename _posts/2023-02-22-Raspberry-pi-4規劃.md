@@ -73,6 +73,7 @@ Minecraft:25565
     ./filebrowser users add admin admin_pass #新增第一個使用者
     ./filebrowser users update admin --perm.admin #指定為管理員權限，後續設定可直接登入此帳號用WEB設定
     ```
+- [nginx https 設定](https://xujinzh.github.io/2020/11/19/cloud-by-filebrowser-and-nginx/index.html)
 - [參考資料](https://blog.icephenix.com/2020/08/%E4%BD%BF%E7%94%A8filebrowser%E6%90%AD%E5%BB%BA%E4%B8%80%E5%80%8B%E6%96%87%E4%BB%B6%E4%BC%BA%E6%9C%8D%E5%99%A8/)
 
 ## USB隨身碟開機
