@@ -20,6 +20,7 @@ tags:
 - [安裝Raspberry Pi OS](https://www.chipwaygo.com/doc/rpi_install.php)
 - [如何更新 Raspbian?](https://piepie.com.tw/20004/faq-how-to-update-and-upgrade-raspbian)
 - [headless解析度調整](https://m.clearbluedesign.com/make-headless-raspberry-pi-vnc-open-in-1080p-9f644ecc3cdd)
+- [headless解析度調整](https://www.realvnc.com/en/blog/how-to-use-a-headless-raspberry-pi-with-vnc-connect/)
 - [如何申請非固定至固定ip](https://support.1shop.tw/%E5%A6%82%E4%BD%95%E7%94%B3%E8%AB%8B%E5%9B%BA%E5%AE%9Aip-%E4%B8%AD%E8%8F%AF%E9%9B%BB%E4%BF%A1hinet/)
 - [如何讓樹莓派取得固定ip](http://yhhuang1966.blogspot.com/2021/08/ppoe-ip.html)
 
@@ -47,10 +48,17 @@ tags:
     /usr/local/bin/noip2 -S #先查看PID
     /usr/local/bin/noip2 -K {PID} #再砍程序
     ```
-
-> 要使用NO-IP連進租屋處網路要設定通訊埠轉發(Port Forwarding),指定樹莓派的IP位置與要對應的Port號  
-VNC:5900  
-Minecraft:25565  
+- 固定ip設定SSL
+    ```bash
+    $ apt-get update
+    $ sudo apt-get install certbot
+    $ apt-get install python3-certbot-nginx
+    $ sudo certbot --nginx
+    $ sudo certbot renew --dry-run #測試是否還有效 移除--dry-run就可以更新憑證
+    ```
+> ~~要使用NO-IP連進租屋處網路要設定通訊埠轉發(Port Forwarding),指定樹莓派的IP位置與要對應的Port號  ~~
+~~VNC:5900  ~~
+~~Minecraft:25565  ~~
 
 ###  參考資料
 - [浮動IP照樣架站！NOIP DDNS 動態域名免費服務設定，遠端桌面也好用](https://iqmore.tw/no-ip-free-dynamic-dns)
