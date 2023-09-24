@@ -67,9 +67,10 @@ Minecraft:25565
 - 初始化filebrowser設定，可以先把檔案移到想要的目錄在執行以下指令
     ```batch
     ./filebrowser config init #會產生一個filebrowser.db的設定檔
-    ./filebrowser config set -a <your ip address> #預設為127.0.0.1不能外部訪問要改為IP位置
+    ./filebrowser config set -a 0.0.0.0 #預設為127.0.0.1不能外部訪問要改為IP位置，使用nginx代理
     ./filebrowser config set -p 8081 #預設port號為8080，要修改執行這行
     ./filebrowser config set -r <想要當檔案目錄的路徑> #上傳下載都會在這個目錄下進行
+    ./filebrowser config set -b /file #要與nginx location一致
     ./filebrowser users add admin admin_pass #新增第一個使用者
     ./filebrowser users update admin --perm.admin #指定為管理員權限，後續設定可直接登入此帳號用WEB設定
     ```
