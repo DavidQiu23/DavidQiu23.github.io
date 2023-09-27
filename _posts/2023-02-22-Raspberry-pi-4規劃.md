@@ -23,6 +23,8 @@ tags:
 - [headless解析度調整](https://www.realvnc.com/en/blog/how-to-use-a-headless-raspberry-pi-with-vnc-connect/)
 - [如何申請非固定至固定ip](https://support.1shop.tw/%E5%A6%82%E4%BD%95%E7%94%B3%E8%AB%8B%E5%9B%BA%E5%AE%9Aip-%E4%B8%AD%E8%8F%AF%E9%9B%BB%E4%BF%A1hinet/)
 - [如何讓樹莓派取得固定ip](http://yhhuang1966.blogspot.com/2021/08/ppoe-ip.html)
+- [防火牆設定](https://pimylifeup.com/raspberry-pi-ufw/)
+- [防火牆設定](https://adamtheautomator.com/raspberry-pi-firewall/)
 
 ## NO-IP
 
