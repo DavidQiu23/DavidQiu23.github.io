@@ -1,100 +1,88 @@
 ---
-title:  "Raspberry pi 4規劃"
+title:  "Raspberry Pi 4 伺服器建置與規劃"
 toc: true
-toc_label: "Raspberry pi 4規劃"
+toc_label: "目錄"
 tags: 
-    - Raspberry pi
+    - Raspberry Pi
 ---
 
-## 作業系統
+## 作業系統安裝與初始化
 
-- 使用Raspberry Pi Imager燒錄作業系統至sd卡或隨身碟
-- 選擇Raspberry Pi OS(64-bit)
-- 安裝新酷音(中文輸入法) `sudo apt-get install scim-chewing`
-    - 要重新啟動才會生效
-- 開啟VNC
-- 設定環境變數 [參考](https://pimylifeup.com/environment-variables-linux/)
-    - 定義在`~/.profile`裡,指令加在最後一行後面,範圍是該登入的使用者,**特殊字元用單引號**
+- **燒錄系統**：建議使用官方提供的 [Raspberry Pi Imager](https://www.raspberrypi.com/software/) 將作業系統燒錄至 SD 卡或 USB 隨身碟。
+- **系統版本**：推薦選擇 **Raspberry Pi OS (64-bit)** 以獲得更好的效能。
+- **中文輸入法**：安裝新酷音輸入法：
+    ```bash
+    sudo apt-get update
+    sudo apt-get install scim-chewing
+    ```
+    *安裝完成後需重新啟動系統以使設定生效。*
+- **啟用遠端桌面**：於設定介面開啟 **VNC** 功能。
+- **環境變數設定**：
+    - 編輯 `~/.profile` 檔案，將環境變數指令添加於末尾。
+    - 生效範圍為當前登入使用者。**注意：特殊字元請務必使用單引號包覆。**
 
 ### 參考資料
-- [安裝Raspberry Pi OS](https://www.chipwaygo.com/doc/rpi_install.php)
-- [如何更新 Raspbian?](https://piepie.com.tw/20004/faq-how-to-update-and-upgrade-raspbian)
-- [headless解析度調整](https://m.clearbluedesign.com/make-headless-raspberry-pi-vnc-open-in-1080p-9f644ecc3cdd)
-- [headless解析度調整](https://www.realvnc.com/en/blog/how-to-use-a-headless-raspberry-pi-with-vnc-connect/)
-- [如何申請非固定至固定ip](https://support.1shop.tw/%E5%A6%82%E4%BD%95%E7%94%B3%E8%AB%8B%E5%9B%BA%E5%AE%9Aip-%E4%B8%AD%E8%8F%AF%E9%9B%BB%E4%BF%A1hinet/)
-- [如何讓樹莓派取得固定ip](http://yhhuang1966.blogspot.com/2021/08/ppoe-ip.html)
-- [防火牆設定](https://pimylifeup.com/raspberry-pi-ufw/)
-- [防火牆設定](https://adamtheautomator.com/raspberry-pi-firewall/)
+- [Raspberry Pi OS 安裝指南](https://www.chipwaygo.com/doc/rpi_install.php)
+- [如何更新與升級 Raspberry Pi OS](https://piepie.com.tw/20004/faq-how-to-update-and-upgrade-raspbian)
+- [VNC 遠端桌面的解析度調整方法](https://m.clearbluedesign.com/make-headless-raspberry-pi-vnc-open-in-1080p-9f644ecc3cdd)
 
-## NO-IP
+---
 
-- 安裝noip
-    ```batch
-    cd /usr/local/src
-    wget http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
-    tar xzf noip-duc-linux.tar.gz
-    cd noip-2.1.9-1
-    make
-    make install
-    ```
-- 重設noip
-    ```batch
-    /usr/local/bin/noip2 -C
-    ```
-- 啟動noip
-    ```batch
-    /usr/local/bin/noip2
-    ```
-- 關閉noip
-    ```batch
-    /usr/local/bin/noip2 -S #先查看PID
-    /usr/local/bin/noip2 -K {PID} #再砍程序
-    ```
-- 固定ip設定SSL
+## NO-IP 動態域名 (DDNS) 設定
+
+若網路環境為浮動 IP，可透過 NO-IP 提供穩定的域名訪問。
+
+- **下載與安裝 NO-IP 客戶端 (DUC)**：
     ```bash
-    $ apt-get update
-    $ sudo apt-get install certbot
-    $ apt-get install python3-certbot-nginx
-    $ sudo certbot --nginx
-    $ sudo certbot renew --dry-run #測試是否還有效 移除--dry-run就可以更新憑證
+    cd /usr/local/src
+    sudo wget http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
+    sudo tar xzf noip-duc-linux.tar.gz
+    cd noip-2.1.9-1
+    sudo make
+    sudo make install
     ```
-> ~~要使用NO-IP連進租屋處網路要設定通訊埠轉發(Port Forwarding),指定樹莓派的IP位置與要對應的Port號  ~~
-~~VNC:5900  ~~
-~~Minecraft:25565  ~~
+- **基本管理指令**：
+    - **重新配置**：`/usr/local/bin/noip2 -C`
+    - **啟動服務**：`/usr/local/bin/noip2`
+    - **停止服務**：先執行 `/usr/local/bin/noip2 -S` 查詢 PID，再以 `sudo kill {PID}` 終止程序。
 
-###  參考資料
-- [浮動IP照樣架站！NOIP DDNS 動態域名免費服務設定，遠端桌面也好用](https://iqmore.tw/no-ip-free-dynamic-dns)
-- [NO-IP 使用教學 - 程式學習筆記](https://sites.google.com/site/chengshixuexipingtai/qi-ta/no-ip-shi-yong-jiao-xue)
-- [How to Install the Dynamic Update Client on Linux](https://www.noip.com/support/knowledgebase/installing-the-linux-dynamic-update-client/)
-- [NO-IP 安裝設定 · Raspberry Pi 安裝設定手冊](https://lins2000.gitbooks.io/raspberry-pi-installation-guide/content/di-yi-ci-qi-dong/noip-an-zhuang-she-ding.html)
-
-## [Filebrower](https://github.com/filebrowser/filebrowser) (強大的免費檔案管理介面)
-
-- 下載Filebrower
-    ```batch
-    curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash #會下載到/usr/local/bin底下
+- **SSL 憑證設定 (使用 Certbot)**：
+    ```bash
+    sudo apt-get update
+    sudo apt-get install certbot python3-certbot-nginx
+    sudo certbot --nginx
+    # 測試自動續約：sudo certbot renew --dry-run
     ```
-- 初始化filebrowser設定，可以先把檔案移到想要的目錄在執行以下指令
-    ```batch
-    ./filebrowser config init #會產生一個filebrowser.db的設定檔
-    ./filebrowser config set -a 0.0.0.0 #預設為127.0.0.1不能外部訪問要改為IP位置，使用nginx代理
-    ./filebrowser config set -p 8081 #預設port號為8080，要修改執行這行
-    ./filebrowser config set -r <想要當檔案目錄的路徑> #上傳下載都會在這個目錄下進行
-    ./filebrowser config set -b /file #要與nginx location一致
-    ./filebrowser users add admin admin_pass #新增第一個使用者
-    ./filebrowser users update admin --perm.admin #指定為管理員權限，後續設定可直接登入此帳號用WEB設定
+
+> **注意：** 若要從外部網路連回，需於路由器（Router）設定 **連接埠轉發 (Port Forwarding)**，將對應的 Port (如 VNC: 5900, Web: 80/443) 對應至樹莓派的內部 IP。
+
+---
+
+## Filebrowser：強大的網頁檔案管理系統
+
+[Filebrowser](https://github.com/filebrowser/filebrowser) 提供直觀的 Web 介面來管理伺服器檔案。
+
+- **一鍵安裝**：
+    ```bash
+    curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
     ```
-- [nginx https 設定](https://xujinzh.github.io/2020/11/19/cloud-by-filebrowser-and-nginx/index.html)
-- [參考資料](https://blog.icephenix.com/2020/08/%E4%BD%BF%E7%94%A8filebrowser%E6%90%AD%E5%BB%BA%E4%B8%80%E5%80%8B%E6%96%87%E4%BB%B6%E4%BC%BA%E6%9C%8D%E5%99%A8/)
+- **初始化設定指令**：
+    ```bash
+    filebrowser config init                      # 產生設定檔資料庫 (filebrowser.db)
+    filebrowser config set -a 0.0.0.0            # 監聽所有 IP 位址
+    filebrowser config set -p 8081               # 指定 Port 號
+    filebrowser config set -r /path/to/files     # 設定檔案根目錄
+    filebrowser config set -b /file              # 設定 URL 前綴 (對應 Nginx 的 location)
+    filebrowser users add admin admin_pass       # 建立初始管理員帳號
+    filebrowser users update admin --perm.admin  # 賦予完整管理權限
+    ```
 
-## USB隨身碟開機
+---
 
-> 注意！！不能使用**NOOBS**的版本,這坑很大,試了好幾天重灌好幾次文章看好幾遍,差點放棄  
-關鍵字：`mmc1 controller never released inhibit bit(s)`,正常看到這行還是能啟動,但是NOOBS會跳兩次這行就卡在第二次的畫面了  
-所以沒試過把sd卡複製到usb裡在啟動能不能成功,我成功是直接用Imager燒在usb裡直接開機
+## USB 隨身碟開機 (Boot from USB)
 
-- 照著[這篇](https://sleeplessbeastie.eu/2022/12/16/how-to-boot-raspberry-pi-4-from-usb-ssd/)操作應該不會錯
+相較於 SD 卡，使用 USB SSD 或隨身碟開機可顯著提升讀寫速度與穩定性。
 
+> **踩坑心得：** 請**避免使用 NOOBS 版本**進行 USB 開機設定，否則容易卡在 `mmc1 controller never released inhibit bit(s)`。建議直接使用 Raspberry Pi Imager 將系統燒錄至 USB 裝置中。
 
-
-
+- **參考操作指南**：[How to Boot Raspberry Pi 4 from USB/SSD](https://sleeplessbeastie.eu/2022/12/16/how-to-boot-raspberry-pi-4-from-usb-ssd/)

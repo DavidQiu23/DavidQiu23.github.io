@@ -1,24 +1,26 @@
 ---
 layout: single
-title:  "Welcome to Jekyll!"
+title:  "歡迎來到我的 Jekyll 部落格！"
 date:   2023-02-07 15:29:43 +0800
 categories: jekyll update
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+你可以在 `_posts` 目錄下找到這篇文章。你可以嘗試編輯它並重新建置網站，以即時查看更改的效果。
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+Jekyll 提供多種建置網站的方式，其中最常用的方法是執行 `jekyll serve`。這會啟動一個本地伺服器，並在偵測到檔案更新時自動重新產生網站。
 
-Jekyll also offers powerful support for code snippets:
+若要新增文章，只需在 `_posts` 目錄中建立一個符合 `YYYY-MM-DD-文章名稱.副檔名` 命名規範的檔案，並包含必要的 Front Matter 區塊即可。你可以參考這篇文章的原始碼來了解其運作方式。
+
+Jekyll 對程式碼片段（Code Snippets）提供了強大的支援：
 
 {% highlight ruby %}
 def print_hi(name)
   puts "Hi, #{name}"
 end
 print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
+#=> 在標準輸出 (STDOUT) 列印 'Hi, Tom'
 {% endhighlight %}
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+欲進一步了解如何發揮 Jekyll 的最大效用，請參閱 [Jekyll 官方文件][jekyll-docs]。若有任何臭蟲或功能需求，請提交至 [Jekyll GitHub 儲存庫][jekyll-gh]。如果你有任何問題，也可以在 [Jekyll Talk][jekyll-talk] 論壇中提問。
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
 [jekyll-gh]:   https://github.com/jekyll/jekyll
