@@ -1,27 +1,9 @@
 ---
-title:  "Git 常用指令小筆記"
-tags: 
+title:  "Git Commit Message 前綴規範"
+tags:
     - Git
 ---
 
-### 讓 .gitignore 重新生效
-當檔案已被追蹤（Tracked）後才加入 `.gitignore` 時，需清除快取以使設定生效：
-
-```bash
-git rm -r --cached . # 清除快取
-git add .            # 重新追蹤檔案
-```
-
-### Git 遠端儲存庫操作
-
-```bash
-git remote -v                 # 查看目前遠端儲存庫設定
-git remote add <name> <url>   # 新增遠端儲存庫 (例如 name 為 origin)
-git push <name> <branch_name> # 將本地分支推送到遠端
-git pull                      # 拉取遠端資料並自動合併
-```
-
-### Git Commit Message 前綴規範
 遵循規範有助於團隊協作與日後維護：
 
   - **feat**      - 新功能 (New Feature)
@@ -35,5 +17,5 @@ git pull                      # 拉取遠端資料並自動合併
   - **build**     - 建置系統相關 (打包、發布流程)
   - **perf**      - 效能優化
 
-### 參考資料
+## 參考資料
 - [Git Commit Message 這樣寫會更好](https://wadehuanglearning.blogspot.com/2019/05/commit-commit-commit-why-what-commit.html)

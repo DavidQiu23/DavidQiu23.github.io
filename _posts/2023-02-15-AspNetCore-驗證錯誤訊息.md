@@ -1,10 +1,8 @@
 ---
-title:  ".NET 開發小筆記"
-tags: 
+title:  "ASP.NET Core 自定義 Web API 驗證錯誤訊息"
+tags:
     - .NET
 ---
-
-## ASP.NET Core：自定義 Web API 驗證錯誤訊息
 
 在 ASP.NET Core 中，使用 `[ApiController]` 屬性會自動對請求進行模型驗證（Model Validation）。若驗證失敗，系統預設會回傳 400 BadRequest 錯誤。
 
@@ -66,15 +64,3 @@ public async Task Invoke(HttpContext httpContext)
     }
 }
 ```
-
-## 自動化測試利器：Playwright for .NET
-
-Playwright 是由 Microsoft 開發的現代化網頁測試工具，支援多種瀏覽器且反應速度極快。
-
-- **參考文章**：[模擬網頁操作及自動測試程式開發利器 - Playwright for .NET (黑大)](https://blog.darkthread.net/blog/playwright-notes/)
-
-## .NET 請求運作流程圖
-
-下圖展示了 .NET 中 Filter 與 Middleware 的執行順序：
-
-![.NET 運作流程](/assets/images/filters.png)
