@@ -201,7 +201,7 @@ catch (Exception ex)
 
 ## 背景服務
 
-前面的批次工作放進常駐服務裡，token 就不用自己建了，host 會給。`BackgroundService.ExecuteAsync(CancellationToken stoppingToken)` 的那個參數，就是應用程式的停止訊號。Ctrl+C（SIGINT）與容器停止時送進來的 SIGTERM，都由 host 的 lifetime 接住，翻譯成這顆 token 的取消。你不必自己處理訊號，只要把 `stoppingToken` 一路往下傳。
+前面的批次工作放進常駐服務裡，token 就不用自己建了，host 會給。`BackgroundService.ExecuteAsync(CancellationToken stoppingToken)` 的那個參數，就是應用程式的停止訊號。Ctrl+C（SIGINT）與外面叫它關機時送進來的 SIGTERM，都由 host 的 lifetime 接住，翻譯成這顆 token 的取消。你不必自己處理訊號，只要把 `stoppingToken` 一路往下傳。
 
 ```csharp
 public class FileBatchService(
@@ -255,7 +255,7 @@ builder.Services.Configure<HostOptions>(o => o.ShutdownTimeout = TimeSpan.FromMi
 builder.Services.AddHostedService<FileBatchService>();
 ```
 
-調大不見得有用，因為外面還有一層。Kubernetes 的 `terminationGracePeriodSeconds` 預設也是 30 秒，過了就送 SIGKILL——host 那邊調成兩分鐘，Pod 還是 30 秒被砍。兩邊要一起調。所以收尾要嘛壓在時限內做完，要嘛改成「每處理完一筆就把進度寫回去」，讓下次啟動接得回來。
+調大之前先想清楚：關機被拖住的那段時間，外面叫停的人多半也在等。比較耐用的做法是讓收尾本身不需要時間——每處理完一筆就把進度寫回去，關機時什麼都不用補，下次啟動直接從斷點接。
 
 ASP.NET Core 裡是同一套機制，token 換個來源而已：`HttpContext.RequestAborted` 在客戶端斷線時取消。使用者關掉頁面、按了重新整理，這顆 token 就會被按下。把它往下傳給資料庫查詢與 HTTP 呼叫，沒人在等的工作就不會繼續佔著資源做完。
 
