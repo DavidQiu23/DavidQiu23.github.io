@@ -365,14 +365,17 @@ var results = await Task.WhenAll(items.Select(ProcessAsync));   // 沒有共用�
 
 ## 怎麼選
 
-| 情境 | 用什麼 |
-| --- | --- |
-| 一堆 API 或查詢，全部一起衝 | `await Task.WhenAll(...)` |
-| 一堆 API 或查詢，要限制同時幾筆 | `await Parallel.ForEachAsync(...)` |
-| 一堆計算工作 | `Parallel.ForEach` / `Parallel.For` |
-| 幾件不相干的事同時做 | `Parallel.Invoke` |
-| 一件很重的計算，不想卡住畫面 | `await Task.Run(() => ...)` |
-| 只有一筆 IO 工作 | 直接 `await`，不必包東西 |
+```mermaid
+flowchart TD
+    S{"慢在哪裡？"} -->|"等別人（IO-bound）"| IO{"幾筆？"}
+    IO -->|一筆| I1["直接 await，不必包東西"]
+    IO -->|一堆，全部一起衝| I2["await Task.WhenAll(...)"]
+    IO -->|一堆，要限制同時幾筆| I3["await Parallel.ForEachAsync(...)"]
+    S -->|"自己算（CPU-bound）"| CPU{"什麼樣的計算？"}
+    CPU -->|一件很重，不想卡住畫面| C1["await Task.Run(() => ...)"]
+    CPU -->|一堆同類計算| C2["Parallel.ForEach / Parallel.For"]
+    CPU -->|幾件不相干的事同時做| C3["Parallel.Invoke"]
+```
 
 兩個補充：
 

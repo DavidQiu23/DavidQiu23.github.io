@@ -1,0 +1,20 @@
+<!-- mermaid：把 ```mermaid code block 轉成圖 -->
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    const blocks = document.querySelectorAll("div.language-mermaid, pre > code.language-mermaid");
+    if (!blocks.length) return;
+
+    blocks.forEach((block) => {
+      const container = block.tagName === "CODE" ? block.parentElement : block;
+      const graph = document.createElement("pre");
+      graph.className = "mermaid";
+      graph.textContent = block.textContent;
+      container.replaceWith(graph);
+    });
+
+    mermaid.initialize({ startOnLoad: false, theme: "dark" });
+    await mermaid.run({ querySelector: "pre.mermaid" });
+  });
+</script>

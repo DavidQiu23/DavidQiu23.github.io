@@ -39,6 +39,14 @@ tags:
 
 當合併時偵測到 Migration 樹分岔（快照檔衝突），官方的正解**不是手動去合併快照**，而是「重建自己的 Migration」。文件標題為 *Resolving diverged migration trees*，四個步驟如下：
 
+```mermaid
+flowchart LR
+    M0["main：既有 Migration"] --> A["A 的 Migration<br/>快照 = 既有 + A"]
+    M0 --> B["B 的 Migration<br/>快照 = 既有 + B（沒有 A）"]
+    A --> R["B 重建的 Migration<br/>快照 = 既有 + A + B"]
+    B -. "remove 後重新 add" .-> R
+```
+
 **步驟 1 — 中止合併**，把工作目錄還原到合併前的狀態。
 
 ```bash

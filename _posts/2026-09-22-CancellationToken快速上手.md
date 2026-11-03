@@ -45,6 +45,24 @@ catch (OperationCanceledException)
 
 重點是**按的人跟停的人是兩段不同的程式碼**。`cts.Cancel()` 不會讓 `Run` 立刻停止，它只是把 token 上的旗標翻成「已請求取消」，然後就回來了。`Run` 什麼時候真的停，完全看 `Run` 自己寫得怎麼樣。
 
+```mermaid
+sequenceDiagram
+    participant C as 呼叫端（握 CancellationTokenSource）
+    participant T as CancellationToken
+    participant R as Run（工作本身）
+    C->>R: Task.Run，把 token 交給 Run
+    loop 每處理完一個檔
+        R->>T: 請求取消了嗎？
+        T-->>R: 還沒，繼續
+    end
+    C->>T: cts.Cancel()，只翻旗標就回來
+    Note over R: 還在處理當前這個檔
+    R->>T: 請求取消了嗎？
+    T-->>R: 是
+    R-->>C: 在安全的時間點停手，丟 OperationCanceledException
+    Note over C: await job 接住，印「已取消」
+```
+
 | | `CancellationTokenSource` | `CancellationToken` |
 | --- | --- | --- |
 | 角色 | 遙控器 | 接收器 |
@@ -248,6 +266,22 @@ public class FileBatchService(
 ```
 
 要注意的是 host **不會無限期等你收尾**。送出取消之後它只等 `HostOptions.ShutdownTimeout`，時間到就不等了。這個值預設 30 秒（.NET 6 以前是 5 秒，.NET 7 起改為 30 秒）。收尾要寫進度、要 flush 日誌、要等當前交易做完的，不夠就自己調：
+
+```mermaid
+sequenceDiagram
+    participant O as Ctrl+C / SIGTERM
+    participant H as Host lifetime
+    participant S as ExecuteAsync(stoppingToken)
+    O->>H: 要求關機
+    H->>S: 取消 stoppingToken
+    Note over H: 開始倒數 ShutdownTimeout
+    S->>S: 當前 await 丟 OperationCanceledException，break 離開迴圈
+    alt 時間內收尾完
+        S-->>H: ExecuteAsync 結束，正常關機
+    else 超過 ShutdownTimeout
+        H->>H: 不等了，直接繼續關機
+    end
+```
 
 ```csharp
 // .NET 7 起預設 30 秒

@@ -13,8 +13,9 @@ Logstash：ELK 的「L」，資料收集與處理**管線 (pipeline)**——把�
 
 Logstash 一次處理一筆**事件 (event)**，每筆事件依序流過三段，每段由**外掛 (plugin)** 組成——這三段正好對應 config 的三個最外層區塊：
 
-```
-input → filter → output
+```mermaid
+flowchart LR
+    input --> filter --> output
 ```
 
 每筆事件是一組**欄位 (field)** 的記錄（類似一個 JSON 物件）。原始輸入預設整行放在 `message` 欄位，另有內建欄位如 `@timestamp`（事件時間）、`tags`（標籤陣列）。filter 的工作就是從 `message` 拆出更多欄位、或修改欄位——這也是為什麼 grok 都寫 `match => { "message" => ... }`（從 `message` 拆）。

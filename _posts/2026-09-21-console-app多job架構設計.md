@@ -209,6 +209,19 @@ IJob must = sp.GetRequiredKeyedService<IJob>(JobName.SyncOrder);  // 查不到�
 
 這篇用三個碼：0 成功、2 參數不對（名字打錯）、1 其他失敗。
 
+```mermaid
+flowchart TD
+    S["myapp 參數"] --> H["建 host、註冊 keyed job"]
+    H --> C{"參數跟 JobName 一字不差？"}
+    C -->|否| E2["印可用清單<br/>離開碼 2"]
+    C -->|是| R["開 scope，用 enum 取出 IJob"]
+    R --> J["job.RunAsync()"]
+    J -->|成功| E0["離開碼 0"]
+    H -->|例外| E1["Main 最外層 catch<br/>離開碼 1"]
+    R -->|"忘了註冊，例外"| E1
+    J -->|例外| E1b["記 log<br/>離開碼 1"]
+```
+
 **未捕捉的例外不會變成 1。** 它會變成執行階段自己的碼——Windows 上是 `0xE0434352`，排程器面板顯示的就是這串。所以 `Main` 最外層一定要有 `try/catch`，連建 host 跟讀設定檔都要包在裡面。
 
 **`Environment.ExitCode` 不是 `Environment.Exit()`。** 前者只是設一個值，行程照常跑完再自然結束；後者當場砍掉行程，`finally` 不會跑、緩衝的日誌全部丟掉。job 裡兩個都不要碰，離開碼只在 `Program` 決定。
