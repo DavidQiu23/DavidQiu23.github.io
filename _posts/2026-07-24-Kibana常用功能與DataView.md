@@ -4,7 +4,6 @@ toc: true
 toc_label: "目錄"
 tags:
     - Elasticsearch
-    - 工具
 ---
 
 Kibana：Elasticsearch 官方的視覺化與管理平台，跑在瀏覽器的網頁介面，用來探索資料、畫圖表、管理索引、打 API。功能完整但較重；輕量替代見 [Elasticvue]({% post_url 2026-07-24-Elasticvue %})。預設位置 `http://localhost:5601`。

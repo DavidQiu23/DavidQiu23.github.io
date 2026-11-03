@@ -2,6 +2,7 @@
 title:  "ASP.NET Core 自定義 Web API 驗證錯誤訊息"
 tags:
     - .NET
+    - ASP.NET Core
 ---
 
 在 ASP.NET Core 中，使用 `[ApiController]` 屬性會自動對請求進行模型驗證（Model Validation）。若驗證失敗，系統預設會回傳 400 BadRequest 錯誤。

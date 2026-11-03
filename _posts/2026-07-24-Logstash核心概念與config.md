@@ -4,7 +4,6 @@ toc: true
 toc_label: "目錄"
 tags:
     - Elasticsearch
-    - 工具
 ---
 
 Logstash：ELK 的「L」，資料收集與處理**管線 (pipeline)**——把資料收進來、轉換、再送出去，最常見用途是把 log 清洗、結構化後送進 Elasticsearch。
